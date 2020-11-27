@@ -120,9 +120,7 @@ func (s *Conn) GetBlockStorageInstance(reqParams *RequestBlockStorageInstanceLis
 		return nil, err
 	}
 
-	params["action"] = "getBlockStorageInstanceList"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL, "/server/v2/getBlockStorageInstanceList", params)
 	if err != nil {
 		return nil, err
 	}

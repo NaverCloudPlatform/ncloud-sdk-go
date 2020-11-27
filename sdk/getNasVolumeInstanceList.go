@@ -60,9 +60,7 @@ func (s *Conn) GetNasVolumeInstanceList(reqParams *RequestGetNasVolumeInstanceLi
 		return nil, err
 	}
 
-	params["action"] = "getNasVolumeInstanceList"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL, "/server/v2/getNasVolumeInstanceList", params)
 	if err != nil {
 		return nil, err
 	}

@@ -13,7 +13,7 @@ import (
 var _ = Describe("Change Load Balancer Instance", func() {
 	Describe("Change http Load Balancer Instance", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/loadbalancer").
 				Reply(http.StatusOK).BodyString(`
 					<changeLoadBalancerInstanceConfigurationResponse>
@@ -221,7 +221,7 @@ var _ = Describe("Change Load Balancer Instance", func() {
 
 	Describe("Authorize fail", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/loadbalancer").
 				Reply(http.StatusUnauthorized).BodyString(`<responseError>
 					<returnCode>800</returnCode>
@@ -255,7 +255,7 @@ var _ = Describe("Change Load Balancer Instance", func() {
 
 	Describe("Expired URL", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/loadbalancer").
 				Reply(http.StatusUnauthorized).BodyString(`<responseError>
 					<returnCode>800</returnCode>

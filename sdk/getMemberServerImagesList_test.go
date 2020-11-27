@@ -13,7 +13,7 @@ import (
 var _ = Describe("MemberServerImagesList", func() {
 	Describe("Get all Member Server Image List", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getMemberServerImageListResponse>
 					<requestId>ceff19a9-dd17-4c95-89c7-21b617b20628</requestId>
@@ -136,7 +136,7 @@ var _ = Describe("MemberServerImagesList", func() {
 
 	Describe("Get One Member Server Image List which memberServerImageNoList.1 is 2440", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getMemberServerImageListResponse>
 					<requestId>b65188cf-4cfb-46c4-ab39-2e41107c5e2b</requestId>
@@ -220,7 +220,7 @@ var _ = Describe("MemberServerImagesList", func() {
 
 	Describe("There is no member server image list", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getMemberServerImageListResponse>
 					<requestId>97484034-36a6-4ec6-abd4-cfc987890149</requestId>
@@ -247,7 +247,7 @@ var _ = Describe("MemberServerImagesList", func() {
 
 	Describe("Authorize fail", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusUnauthorized).BodyString(`<responseError>
 					<returnCode>800</returnCode>

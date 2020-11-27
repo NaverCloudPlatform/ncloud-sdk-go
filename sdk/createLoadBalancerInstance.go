@@ -144,9 +144,7 @@ func (s *Conn) CreateLoadBalancerInstance(reqParams *RequestCreateLoadBalancerIn
 		return nil, err
 	}
 
-	params["action"] = "createLoadBalancerInstance"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL+"loadbalancer/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL, "/loadbalancer/v2/createLoadBalancerInstance", params)
 	if err != nil {
 		return nil, err
 	}

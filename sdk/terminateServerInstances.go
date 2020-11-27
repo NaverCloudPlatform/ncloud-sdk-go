@@ -33,9 +33,7 @@ func (s *Conn) TerminateServerInstances(reqParams *RequestTerminateServerInstanc
 		return nil, err
 	}
 
-	params["action"] = "terminateServerInstances"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL, "/server/v2/terminateServerInstances", params)
 	if err != nil {
 		return nil, err
 	}

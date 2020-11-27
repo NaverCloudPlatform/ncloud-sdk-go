@@ -124,9 +124,7 @@ func (s *Conn) CreateServerInstances(reqParams *RequestCreateServerInstance) (*S
 		return nil, err
 	}
 
-	params["action"] = "createServerInstances"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL, "/server/v2/createServerInstances", params)
 	if err != nil {
 		return nil, err
 	}

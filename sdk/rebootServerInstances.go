@@ -32,9 +32,7 @@ func (s *Conn) RebootServerInstances(reqParams *RequestRebootServerInstances) (*
 		return nil, err
 	}
 
-	params["action"] = "rebootServerInstances"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL, "/server/v2/rebootServerInstances", params)
 	if err != nil {
 		return nil, err
 	}

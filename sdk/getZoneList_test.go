@@ -12,7 +12,7 @@ import (
 var _ = Describe("Get Zone List", func() {
 	Describe("Get Zone List", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getZoneListResponse>
 					<requestId>f650ca08-937c-49e5-9a33-aaa4e1d3412a</requestId>
@@ -50,7 +50,7 @@ var _ = Describe("Get Zone List", func() {
 
 	Describe("Invalid RegionNo", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusBadRequest).BodyString(`<responseError>
 					<returnCode>1300</returnCode>

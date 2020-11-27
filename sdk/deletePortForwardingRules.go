@@ -40,9 +40,7 @@ func (s *Conn) DeletePortForwardingRules(reqParams *RequestDeletePortForwardingR
 		return nil, err
 	}
 
-	params["action"] = "deletePortForwardingRules"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL, "/server/v2/deletePortForwardingRules", params)
 	if err != nil {
 		return nil, err
 	}

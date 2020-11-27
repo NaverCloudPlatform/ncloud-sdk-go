@@ -13,7 +13,7 @@ import (
 var _ = Describe("Create Server Image", func() {
 	Describe("Create Server Image", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusOK).BodyString(`<createMemberServerImageResponse>
 					<requestId>148e5d84-1e01-411b-812f-f092c959da3a</requestId>
@@ -97,7 +97,7 @@ var _ = Describe("Create Server Image", func() {
 
 	Describe("Unable to create member server image", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusBadRequest).BodyString(`<responseError>
 					<returnCode>25018</returnCode>
@@ -125,7 +125,7 @@ var _ = Describe("Create Server Image", func() {
 
 	Describe("Unable to create member server image", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusBadRequest).BodyString(`<responseError>
 					<returnCode>25008</returnCode>
@@ -153,7 +153,7 @@ var _ = Describe("Create Server Image", func() {
 
 	Describe("Duplicate server image name", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusBadRequest).BodyString(`<responseError>
 					<returnCode>10300</returnCode>

@@ -13,7 +13,7 @@ import (
 var _ = Describe("Delete Port Forwarding Rules", func() {
 	Describe("Delete Port Forwarding Rules", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusOK).BodyString(`<deletePortForwardingRulesResponse>
     <requestId>54b32354-3acb-489c-8bdb-09a722555a75</requestId>

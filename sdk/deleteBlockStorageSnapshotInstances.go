@@ -31,9 +31,7 @@ func (s *Conn) DeleteBlockStorageSnapshotInstances(blockStorageSnapshotInstanceN
 		return nil, err
 	}
 
-	params["action"] = "deleteBlockStorageSnapshotInstances"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL, "/server/v2/deleteBlockStorageSnapshotInstances", params)
 	if err != nil {
 		return nil, err
 	}

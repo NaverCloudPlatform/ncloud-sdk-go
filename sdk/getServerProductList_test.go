@@ -13,7 +13,7 @@ import (
 var _ = Describe("ServerProductList", func() {
 	Describe("Get Server Product List by Server Image Product Code", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getServerProductListResponse>
 					<requestId>0e790dc1-f636-4791-922b-a11c9ad79de2</requestId>
@@ -1068,7 +1068,7 @@ var _ = Describe("ServerProductList", func() {
 
 	Describe("Get Server Product List by Server Image Product Code with a specific region no", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getServerProductListResponse>
 					<requestId>ed5b199a-3f02-42f4-9b0e-4e3ab202cb10</requestId>
@@ -1183,7 +1183,7 @@ var _ = Describe("ServerProductList", func() {
 
 	Describe("Get Server Product List by Server Image Product Code with a specific region no and exclusive product code", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getServerProductListResponse>
 					<requestId>bade0f6c-0bc2-40d9-af49-5fdced57ddb4</requestId>
@@ -1272,7 +1272,7 @@ var _ = Describe("ServerProductList", func() {
 
 	Describe("Get Server Product List by Server Image Product Code with a specific region no and a specific product code", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getServerProductListResponse>
 					<requestId>79cdf702-de73-45ed-9b87-b2052acb0947</requestId>

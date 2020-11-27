@@ -9,7 +9,7 @@ func NewConnection(accessKey string, secretKey string) *Conn {
 	conn := &Conn{
 		accessKey: accessKey,
 		secretKey: secretKey,
-		apiURL:    "https://api.ncloud.com/",
+		apiURL:    "https://ncloud.apigw.ntruss.com/",
 	}
 
 	// for other phase(dev, test, beta ...) test

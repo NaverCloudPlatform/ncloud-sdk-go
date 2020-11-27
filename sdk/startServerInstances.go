@@ -33,9 +33,7 @@ func (s *Conn) StartServerInstances(reqParams *RequestStartServerInstances) (*Se
 		return nil, err
 	}
 
-	params["action"] = "startServerInstances"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL, "/server/v2/startServerInstances", params)
 	if err != nil {
 		return nil, err
 	}

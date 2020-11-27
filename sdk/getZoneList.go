@@ -12,13 +12,12 @@ import (
 // GetZoneList get zone list
 func (s *Conn) GetZoneList(regionNo string) (*ZoneList, error) {
 	params := make(map[string]string)
-	params["action"] = "getZoneList"
 
 	if regionNo != "" {
 		params["regionNo"] = regionNo
 	}
 
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL, "/server/v2/getZoneList", params)
 	if err != nil {
 		return nil, err
 	}

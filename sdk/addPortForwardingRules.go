@@ -38,9 +38,7 @@ func (s *Conn) AddPortForwardingRules(reqParams *RequestAddPortForwardingRules) 
 		return nil, err
 	}
 
-	params["action"] = "addPortForwardingRules"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL, "/server/v2/addPortForwardingRules", params)
 	if err != nil {
 		return nil, err
 	}

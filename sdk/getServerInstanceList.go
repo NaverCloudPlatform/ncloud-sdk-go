@@ -117,9 +117,7 @@ func (s *Conn) GetServerInstanceList(reqParams *RequestGetServerInstanceList) (*
 		return nil, err
 	}
 
-	params["action"] = "getServerInstanceList"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL, "/server/v2/getServerInstanceList", params)
 	if err != nil {
 		return nil, err
 	}

@@ -34,9 +34,7 @@ func (s *Conn) DetachBlockStorageInstance(reqParams *RequestDetachBlockStorageIn
 		return nil, err
 	}
 
-	params["action"] = "detachBlockStorageInstances"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL, "/server/v2/detachBlockStorageInstances", params)
 	if err != nil {
 		return nil, err
 	}

@@ -13,7 +13,7 @@ import (
 var _ = Describe("Server Image Product List", func() {
 	Describe("Get all Server Image Product List", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getServerImageProductListResponse>
 					<requestId>03a18f33-dc4b-4bc4-be14-fd886cbf2a8d</requestId>
@@ -716,7 +716,7 @@ var _ = Describe("Server Image Product List", func() {
 
 	Describe("Get One Server Image Product List which product Code : SPSW0LINUX000046", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getServerImageProductListResponse>
 					<requestId>94f76273-6410-46ed-809b-352ce50f544d</requestId>
@@ -784,7 +784,7 @@ var _ = Describe("Server Image Product List", func() {
 
 	Describe("There is no server image product list", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getServerImageProductListResponse>
 					<requestId>33630663-e742-4283-b289-bdcafa04a768</requestId>
@@ -814,7 +814,7 @@ var _ = Describe("Server Image Product List", func() {
 
 	Describe("Authorize fail", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusUnauthorized).BodyString(`<responseError>
 					<returnCode>800</returnCode>

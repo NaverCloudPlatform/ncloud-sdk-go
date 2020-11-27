@@ -13,7 +13,7 @@ import (
 var _ = Describe("Add Nas Volume Access Control", func() {
 	Describe("Add Nas Volume Access Control", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusOK).BodyString(`
 					<AddNasVolumeAccessControlResponse>
@@ -243,7 +243,7 @@ var _ = Describe("Add Nas Volume Access Control", func() {
 
 	Describe("Invalid nasVolumeInstanceNo", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusBadRequest).BodyString(`
 					<responseError>
@@ -271,7 +271,7 @@ var _ = Describe("Add Nas Volume Access Control", func() {
 
 	Describe("Authorize fail", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusUnauthorized).BodyString(`<responseError>
 					<returnCode>800</returnCode>
@@ -298,7 +298,7 @@ var _ = Describe("Add Nas Volume Access Control", func() {
 
 	Describe("Expired URL", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusUnauthorized).BodyString(`<responseError>
 					<returnCode>800</returnCode>

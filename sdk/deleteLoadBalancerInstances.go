@@ -35,9 +35,7 @@ func (s *Conn) DeleteLoadBalancerInstances(reqParams *RequestDeleteLoadBalancerI
 		return nil, err
 	}
 
-	params["action"] = "deleteLoadBalancerInstances"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL+"loadbalancer/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL, "/loadbalancer/v2/deleteLoadBalancerInstances", params)
 	if err != nil {
 		return nil, err
 	}

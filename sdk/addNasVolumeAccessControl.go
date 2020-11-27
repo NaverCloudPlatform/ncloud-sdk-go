@@ -45,9 +45,7 @@ func (s *Conn) AddNasVolumeAccessControl(reqParams *RequestNasVolumeAccessContro
 		return nil, err
 	}
 
-	params["action"] = "addNasVolumeAccessControl"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL, "/server/v2/addNasVolumeAccessControl", params)
 	if err != nil {
 		return nil, err
 	}

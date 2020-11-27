@@ -13,7 +13,7 @@ import (
 var _ = Describe("GetLoginKeyList", func() {
 	Describe("Get all login key List", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getLoginKeyListResponse>
 					<requestId>be885b84-4fa7-4f74-a688-b7b8dee72950</requestId>
@@ -71,7 +71,7 @@ var _ = Describe("GetLoginKeyList", func() {
 
 	Describe("Get one loginKey list which KeyName is packer-1512019276", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getLoginKeyListResponse>
 					<requestId>53629aee-b34b-4371-b834-94c82e0077fe</requestId>
@@ -112,7 +112,7 @@ var _ = Describe("GetLoginKeyList", func() {
 
 	Describe("There is no login key list list", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getLoginKeyListResponse>
 					<requestId>b275cef4-117f-428d-9bad-825a93f51227</requestId>

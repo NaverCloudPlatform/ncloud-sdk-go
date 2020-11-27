@@ -13,7 +13,7 @@ import (
 var _ = Describe("Get Public IP Instance List", func() {
 	Describe("Get all Public IP Instance List", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getPublicIpInstanceListResponse>
 					<requestId>66fe1605-a8d8-4d96-a19b-357169205c93</requestId>
@@ -90,7 +90,7 @@ var _ = Describe("Get Public IP Instance List", func() {
 
 	Describe("Get Public IP Instance List which is parameters", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getPublicIpInstanceListResponse>
 					<requestId>3c0668ae-6c6d-4b60-9bb5-874204f81802</requestId>
@@ -214,7 +214,7 @@ var _ = Describe("Get Public IP Instance List", func() {
 
 	Describe("There is no Public IP Instance list", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getPublicIpInstanceListResponse>
 					<requestId>f7791c1d-941f-4968-bc24-a7224e16d39f</requestId>

@@ -59,9 +59,7 @@ func (s *Conn) GetMemberServerImageList(reqParams *RequestServerImageList) (*Mem
 		return nil, err
 	}
 
-	params["action"] = "getMemberServerImageList"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL, "/server/v2/getMemberServerImageList", params)
 	if err != nil {
 		return nil, err
 	}

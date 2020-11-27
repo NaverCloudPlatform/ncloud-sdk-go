@@ -13,7 +13,7 @@ import (
 var _ = Describe("Get Load Balanced Server Instance List", func() {
 	Describe("Get all Load Balanced Server Instance List", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/loadbalancer").
 				Reply(http.StatusOK).BodyString(`
 					<getLoadBalancedServerInstanceListResponse>
@@ -113,7 +113,7 @@ var _ = Describe("Get Load Balanced Server Instance List", func() {
 
 	Describe("There is no Load Balanced Server Instance list", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/loadbalancer").
 				Reply(http.StatusOK).BodyString(`<GetLoadBalancedServerInstanceListResponse>
 					<requestId>7cf7aa28-89da-4dee-8122-61ca61f92e17</requestId>
@@ -140,7 +140,7 @@ var _ = Describe("Get Load Balanced Server Instance List", func() {
 
 	Describe("Authorize fail", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/loadbalancer").
 				Reply(http.StatusUnauthorized).BodyString(`<responseError>
 					<returnCode>800</returnCode>

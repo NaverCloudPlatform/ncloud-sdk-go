@@ -116,9 +116,7 @@ func (s *Conn) ChangeLoadBalancerInstanceConfiguration(reqParams *RequestChangeL
 		return nil, err
 	}
 
-	params["action"] = "changeLoadBalancerInstanceConfiguration"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL+"loadbalancer/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL, "/loadbalancer/v2/changeLoadBalancerInstanceConfiguration", params)
 	if err != nil {
 		return nil, err
 	}

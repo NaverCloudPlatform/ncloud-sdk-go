@@ -13,7 +13,7 @@ import (
 var _ = Describe("GetRegionList", func() {
 	Describe("Get all region list", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getRegionListResponse>
 					<requestId>8d548f30-daac-4599-a9c0-e5bb4a3061cc</requestId>

@@ -77,9 +77,7 @@ func (s *Conn) CreateLaunchConfiguration(reqParams *RequestCreateLaunchConfigura
 		return nil, err
 	}
 
-	params["action"] = "createLaunchConfiguration"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL+"autoscaling/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL, "/autoscaling/v2/createLaunchConfiguration", params)
 	if err != nil {
 		return nil, err
 	}

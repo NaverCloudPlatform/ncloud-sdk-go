@@ -33,9 +33,8 @@ func (s *Conn) GetAccessControlRuleList(accessControlGroupConfigurationNo string
 
 	params := make(map[string]string)
 	params["accessControlGroupConfigurationNo"] = accessControlGroupConfigurationNo
-	params["action"] = "getAccessControlRuleList"
 
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL, "/server/v2/getAccessControlRuleList", params)
 	if err != nil {
 		return nil, err
 	}

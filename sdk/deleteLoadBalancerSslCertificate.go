@@ -18,9 +18,8 @@ func (s *Conn) DeleteLoadBalancerSslCertificate(certificateName string) (*SslCer
 	}
 
 	params["certificateName"] = certificateName
-	params["action"] = "deleteLoadBalancerSslCertificate"
 
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL+"loadbalancer/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL, "/loadbalancer/v2/deleteLoadBalancerSslCertificate", params)
 	if err != nil {
 		return nil, err
 	}

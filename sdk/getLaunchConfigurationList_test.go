@@ -13,7 +13,7 @@ import (
 var _ = Describe("Get Launch Configuration List", func() {
 	Describe("Get all Launch Configuration List", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/autoscaling").
 				Reply(http.StatusOK).BodyString(`
 				<getLaunchConfigurationListResponse>
@@ -79,7 +79,7 @@ var _ = Describe("Get Launch Configuration List", func() {
 
 	Describe("Get One Launch Configuration List which LaunchConfigurationNameList.1 is wefwfwf", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/autoscaling").
 				Reply(http.StatusOK).BodyString(`
 				<getLaunchConfigurationListResponse>
@@ -147,7 +147,7 @@ var _ = Describe("Get Launch Configuration List", func() {
 
 	Describe("There is no Launch Configuration list", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/autoscaling").
 				Reply(http.StatusOK).BodyString(`<getLaunchConfigurationListResponse>
 					<requestId>d16f40b8-f2f1-4c2d-9d0c-ed214c6b9803</requestId>
@@ -176,7 +176,7 @@ var _ = Describe("Get Launch Configuration List", func() {
 
 	Describe("Authorize fail", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/autoscaling").
 				Reply(http.StatusUnauthorized).BodyString(`<responseError>
 					<returnCode>800</returnCode>
@@ -198,7 +198,7 @@ var _ = Describe("Get Launch Configuration List", func() {
 
 	Describe("Expired URL", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/autoscaling").
 				Reply(http.StatusUnauthorized).BodyString(`<responseError>
 					<returnCode>800</returnCode>

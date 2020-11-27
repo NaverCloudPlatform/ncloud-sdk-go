@@ -38,9 +38,7 @@ func (s *Conn) AttachBlockStorageInstance(reqParams *RequestAttachBlockStorageIn
 		return nil, err
 	}
 
-	params["action"] = "attachBlockStorageInstance"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL, "/server/v2/attachBlockStorageInstance", params)
 	if err != nil {
 		return nil, err
 	}

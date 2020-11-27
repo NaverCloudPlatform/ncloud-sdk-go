@@ -38,9 +38,7 @@ func (s *Conn) ChangeNasVolumeSize(reqParams *RequestChangeNasVolumeSize) (*NasV
 		return nil, err
 	}
 
-	params["action"] = "changeNasVolumeSize"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL, "/server/v2/changeNasVolumeSize", params)
 	if err != nil {
 		return nil, err
 	}

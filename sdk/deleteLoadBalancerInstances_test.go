@@ -13,7 +13,7 @@ import (
 var _ = Describe("Delete Load Balancer Instances", func() {
 	Describe("Delete Load Balancer Instance", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/loadbalancer").
 				Reply(http.StatusOK).BodyString(`
 					<deleteLoadBalancerInstancesResponse>
@@ -229,7 +229,7 @@ var _ = Describe("Delete Load Balancer Instances", func() {
 
 	Describe("There is no Load Balancer Instances to be delete", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/loadbalancer").
 				Reply(http.StatusBadRequest).BodyString(`<responseError>
 					<returnCode>10713</returnCode>
@@ -255,7 +255,7 @@ var _ = Describe("Delete Load Balancer Instances", func() {
 
 	Describe("Authorize fail", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/loadbalancer").
 				Reply(http.StatusUnauthorized).BodyString(`<responseError>
 					<returnCode>800</returnCode>
@@ -279,7 +279,7 @@ var _ = Describe("Delete Load Balancer Instances", func() {
 
 	Describe("Expired URL", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/loadbalancer").
 				Reply(http.StatusUnauthorized).BodyString(`<responseError>
 					<returnCode>800</returnCode>

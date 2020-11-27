@@ -13,7 +13,7 @@ import (
 var _ = Describe("Get Server Instance List", func() {
 	Describe("Get all Server Instance List", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getServerInstanceListResponse>
 					<requestId>f8342548-b510-436e-87c0-c0cd63c14fcd</requestId>
@@ -339,7 +339,7 @@ var _ = Describe("Get Server Instance List", func() {
 
 	Describe("Get One Server Instance List which ServerInstanceNoList.1 is 320897", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getServerInstanceListResponse>
 					<requestId>8df5a02f-9d58-489d-9653-65dae4a2a84c</requestId>
@@ -454,7 +454,7 @@ var _ = Describe("Get Server Instance List", func() {
 
 	Describe("There is no Server Instance list", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getServerInstanceListResponse>
 					<requestId>7683adc5-e057-4b7c-aeec-ad20171893fd</requestId>
@@ -484,7 +484,7 @@ var _ = Describe("Get Server Instance List", func() {
 
 	Describe("Authorize fail", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusUnauthorized).BodyString(`<responseError>
 					<returnCode>800</returnCode>

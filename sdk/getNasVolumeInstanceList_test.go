@@ -11,7 +11,7 @@ import (
 var _ = Describe("Get NAS Volume Instance List", func() {
 	Describe("Get NAS Volume Instance List", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(200).BodyString(`<getNasVolumeInstanceListResponse>
     <requestId>8d8434da-f69f-4675-837c-b570e4567795</requestId>
@@ -87,7 +87,7 @@ var _ = Describe("Get NAS Volume Instance List", func() {
 
 	Describe("There is no NAS Volume Instance List", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(200).BodyString(`<getNasVolumeInstanceListResponse>
     	<requestId>8d8434da-f69f-4675-837c-b570e4567795</requestId>

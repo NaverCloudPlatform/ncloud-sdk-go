@@ -32,9 +32,8 @@ func (s *Conn) CreateLoginKey(keyName string) (*PrivateKey, error) {
 	params := make(map[string]string)
 
 	params["keyName"] = keyName
-	params["action"] = "createLoginKey"
 
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL, "/server/v2/createLoginKey", params)
 	if err != nil {
 		return nil, err
 	}

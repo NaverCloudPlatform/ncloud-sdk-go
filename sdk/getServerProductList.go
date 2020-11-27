@@ -62,9 +62,7 @@ func (s *Conn) GetServerProductList(reqParams *RequestGetServerProductList) (*Pr
 		return nil, err
 	}
 
-	params["action"] = "getServerProductList"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL, "/server/v2/getServerProductList", params)
 	if err != nil {
 		return nil, err
 	}

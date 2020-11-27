@@ -13,7 +13,7 @@ import (
 var _ = Describe("Terminate Server Instances", func() {
 	Describe("Terminate Server Instances", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusOK).BodyString(`<terminateServerInstancesResponse>
 					<requestId>8c5572d4-8895-4fad-afca-2a2762fb8b70</requestId>
@@ -109,7 +109,7 @@ var _ = Describe("Terminate Server Instances", func() {
 
 	Describe("Invalid server instance number", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusBadRequest).BodyString(`<responseError>
 					<returnCode>10713</returnCode>
@@ -134,7 +134,7 @@ var _ = Describe("Terminate Server Instances", func() {
 
 	Describe("Unable to terminate", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusBadRequest).BodyString(`<responseError>
 					<returnCode>25022</returnCode>

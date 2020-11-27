@@ -13,7 +13,7 @@ import (
 var _ = Describe("Get Load Balancer SSL Certicate", func() {
 	Describe("Get all Load Balancer SSL Certicate", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/loadbalancer").
 				Reply(http.StatusOK).BodyString(`
 					<getLoadBalancerSslCertificateListResponse>
@@ -150,7 +150,7 @@ var _ = Describe("Get Load Balancer SSL Certicate", func() {
 
 	Describe("Get One Load Balancer SSL Certicate which name is aaa", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/loadbalancer").
 				Reply(http.StatusOK).BodyString(`
 					<getLoadBalancerSslCertificateListResponse>
@@ -237,7 +237,7 @@ var _ = Describe("Get Load Balancer SSL Certicate", func() {
 
 	Describe("There is no Load Balancer SSL Certificate", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/loadbalancer").
 				Reply(http.StatusOK).BodyString(`
 							<getLoadBalancerSslCertificateListResponse>
@@ -265,7 +265,7 @@ var _ = Describe("Get Load Balancer SSL Certicate", func() {
 
 	Describe("Authorize fail", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/loadbalancer").
 				Reply(http.StatusUnauthorized).BodyString(`<responseError>
 					<returnCode>800</returnCode>
@@ -287,7 +287,7 @@ var _ = Describe("Get Load Balancer SSL Certicate", func() {
 
 	Describe("Expired URL", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/loadbalancer").
 				Reply(http.StatusUnauthorized).BodyString(`<responseError>
 					<returnCode>800</returnCode>

@@ -35,9 +35,7 @@ func (s *Conn) GetRootPassword(reqParams *RequestGetRootPassword) (*RootPassword
 		return nil, err
 	}
 
-	params["action"] = "getRootPassword"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL, "/server/v2/getRootPassword", params)
 	if err != nil {
 		return nil, err
 	}

@@ -47,9 +47,7 @@ func (s *Conn) AddLoadBalancerSslCertificate(reqParams *RequestAddSslCertificate
 		return nil, err
 	}
 
-	params["action"] = "addLoadBalancerSslCertificate"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL+"loadbalancer/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL, "/loadbalancer/v2/addLoadBalancerSslCertificate", params)
 	if err != nil {
 		return nil, err
 	}

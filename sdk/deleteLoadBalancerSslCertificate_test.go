@@ -13,7 +13,7 @@ import (
 var _ = Describe("Delete Load Balancer SSL Certicate", func() {
 	Describe("Delete Load Balancer SSL Certicate", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/loadbalancer").
 				Reply(http.StatusOK).BodyString(`
 					<deleteLoadBalancerSslCertificateResponse>
@@ -100,7 +100,7 @@ var _ = Describe("Delete Load Balancer SSL Certicate", func() {
 
 	Describe("Invalid Certificate Name", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/loadbalancer").
 				Reply(http.StatusInternalServerError).BodyString(`
 <responseError>
@@ -127,7 +127,7 @@ If error continue, Please contact our customer service center.`))
 
 	Describe("Authorize fail", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/loadbalancer").
 				Reply(http.StatusUnauthorized).BodyString(`<responseError>
 					<returnCode>800</returnCode>
@@ -149,7 +149,7 @@ If error continue, Please contact our customer service center.`))
 
 	Describe("Expired URL", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/loadbalancer").
 				Reply(http.StatusUnauthorized).BodyString(`<responseError>
 					<returnCode>800</returnCode>

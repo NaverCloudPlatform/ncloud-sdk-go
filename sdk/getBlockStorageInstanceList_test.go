@@ -13,7 +13,7 @@ import (
 var _ = Describe("Get Block Storage Instance List", func() {
 	Describe("Get all Block Storage Instance List", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getBlockStorageInstanceListResponse>
 					<requestId>79e97c32-5cd2-472d-8074-d92edd3a9c99</requestId>
@@ -173,7 +173,7 @@ var _ = Describe("Get Block Storage Instance List", func() {
 
 	Describe("Get One Block Storage Instance List which ServerInstanceNoList.1 is 320897", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getBlockStorageInstanceListResponse>
 					<requestId>f5a87a5d-4fbb-4f57-8ec7-3b1543ed3167</requestId>
@@ -258,7 +258,7 @@ var _ = Describe("Get Block Storage Instance List", func() {
 
 	Describe("There is no Block Storage Instance list", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getBlockStorageInstanceListResponse>
 					<requestId>4500fb43-d21e-4db8-a89f-2ca44cb20f91</requestId>
@@ -287,7 +287,7 @@ var _ = Describe("Get Block Storage Instance List", func() {
 
 	Describe("Authorize fail", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusUnauthorized).BodyString(`<responseError>
 					<returnCode>800</returnCode>

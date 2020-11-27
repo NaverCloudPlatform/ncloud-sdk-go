@@ -8,6 +8,7 @@ type Conn struct {
 	accessKey string
 	secretKey string
 	apiURL    string
+	apiVer    string
 }
 
 // ServerImage structures

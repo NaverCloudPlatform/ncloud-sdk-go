@@ -33,9 +33,7 @@ func (s *Conn) DeletePublicIPInstances(reqParams *RequestDeletePublicIPInstances
 		return nil, err
 	}
 
-	params["action"] = "deletePublicIpInstances"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL, "/server/v2/deletePublicIpInstances", params)
 	if err != nil {
 		return nil, err
 	}

@@ -65,9 +65,7 @@ func (s *Conn) GetLaunchConfigurationList(reqParams *RequestGetLaunchConfigurati
 		return nil, err
 	}
 
-	params["action"] = "getLaunchConfigurationList"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL+"autoscaling/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL, "/autoscaling/v2/getLaunchConfigurationList", params)
 	if err != nil {
 		return nil, err
 	}

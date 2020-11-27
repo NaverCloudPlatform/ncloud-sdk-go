@@ -41,9 +41,7 @@ func (s *Conn) GetPortForwardingRuleList(reqParams *RequestPortForwardingRuleLis
 		return nil, err
 	}
 
-	params["action"] = "getPortForwardingRuleList"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL, "/server/v2/getPortForwardingRuleList", params)
 	if err != nil {
 		return nil, err
 	}

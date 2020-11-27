@@ -13,7 +13,7 @@ import (
 var _ = Describe("Create Launch Configuration", func() {
 	Describe("Create Launch Configuration", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/autoscaling").
 				Reply(http.StatusOK).BodyString(`<createLaunchConfigurationResponse>
 				<requestId>f440cba9-60a0-4b8b-8a8a-466b8b99a23f</requestId>
@@ -89,7 +89,7 @@ var _ = Describe("Create Launch Configuration", func() {
 
 	Describe("Authorize fail", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/autoscaling").
 				Reply(http.StatusUnauthorized).BodyString(`<responseError>
 					<returnCode>800</returnCode>
@@ -114,7 +114,7 @@ var _ = Describe("Create Launch Configuration", func() {
 
 	Describe("Expired URL", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/autoscaling").
 				Reply(http.StatusUnauthorized).BodyString(`<responseError>
 					<returnCode>800</returnCode>

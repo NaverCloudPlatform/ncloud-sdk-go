@@ -49,9 +49,7 @@ func (s *Conn) GetLoginKeyList(reqParams *RequestGetLoginKeyList) (*LoginKeyList
 		return nil, err
 	}
 
-	params["action"] = "getLoginKeyList"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL, "/server/v2/getLoginKeyList", params)
 	if err != nil {
 		return nil, err
 	}

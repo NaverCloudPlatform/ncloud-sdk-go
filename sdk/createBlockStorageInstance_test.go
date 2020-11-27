@@ -13,7 +13,7 @@ import (
 var _ = Describe("Create Block Storage Instance", func() {
 	Describe("Create Block Storage Instance", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusOK).BodyString(`<createBlockStorageInstanceResponse>
 					<requestId>4920c659-d272-4357-b632-fc3a25fa80b2</requestId>
@@ -102,7 +102,7 @@ var _ = Describe("Create Block Storage Instance", func() {
 
 	Describe("Create Block Storage Instance with HDD type", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusOK).BodyString(`<createBlockStorageInstanceResponse>
 					<requestId>09f550a7-1af8-46b1-a435-a5e23e4f2d3c</requestId>
@@ -199,7 +199,7 @@ var _ = Describe("Create Block Storage Instance", func() {
 
 	Describe("Create Block Storage Instance with SSD type", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusOK).BodyString(`<createBlockStorageInstanceResponse>
 					<requestId>dbb5590c-e460-4e9c-9b20-7b08df4f91ad</requestId>
@@ -291,7 +291,7 @@ var _ = Describe("Create Block Storage Instance", func() {
 	Describe("Unable to create Block Storage Instance", func() {
 		Context("when invalid ServerInstanceNo is invalid", func() {
 			BeforeEach(func() {
-				gock.New("https://api.ncloud.com").
+				gock.New("https://ncloud.apigw.ntruss.com").
 					Post("/server").
 					Reply(http.StatusInternalServerError).BodyString(`<responseError>
 						<returnCode>1300</returnCode>
@@ -339,7 +339,7 @@ var _ = Describe("Create Block Storage Instance", func() {
 
 		Context("Duplicate Block Storage Instance name", func() {
 			BeforeEach(func() {
-				gock.New("https://api.ncloud.com").
+				gock.New("https://ncloud.apigw.ntruss.com").
 					Post("/server").
 					Reply(http.StatusBadRequest).BodyString(`<responseError>
 						<returnCode>10300</returnCode>

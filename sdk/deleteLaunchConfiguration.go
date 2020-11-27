@@ -30,9 +30,8 @@ func (s *Conn) DeleteLaunchConfiguration(launchConfigurationName string) (*commo
 	params := make(map[string]string)
 
 	params["launchConfigurationName"] = launchConfigurationName
-	params["action"] = "deleteAutoScalingLaunchConfiguration"
 
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL+"autoscaling/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL, "/autoscaling/v2/deleteAutoScalingLaunchConfiguration", params)
 	if err != nil {
 		return nil, err
 	}

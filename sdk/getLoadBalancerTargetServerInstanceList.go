@@ -44,9 +44,7 @@ func (s *Conn) GetLoadBalancerTargetServerInstanceList(reqParams *RequestGetLoad
 		return nil, err
 	}
 
-	params["action"] = "getLoadBalancerTargetServerInstanceList"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL+"loadbalancer/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL, "/loadbalancer/v2/getLoadBalancerTargetServerInstanceList", params)
 	if err != nil {
 		return nil, err
 	}

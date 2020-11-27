@@ -15,7 +15,7 @@ import (
 var _ = Describe("Add Port Forwarding Rules", func() {
 	Describe("Add Port Forwarding Rules", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusOK).BodyString(`<addPortForwardingRulesResponse>
     <requestId>943e41d1-f2b9-43a9-b308-5f12152a2f7f</requestId>
@@ -175,7 +175,7 @@ var _ = Describe("Add Port Forwarding Rules", func() {
 	Describe("Invalid internal port has been configured", func() {
 		Context("Invalid internal port has been configured", func() {
 			BeforeEach(func() {
-				gock.New("https://api.ncloud.com").
+				gock.New("https://ncloud.apigw.ntruss.com").
 					Post("/server").
 					Reply(http.StatusBadRequest).BodyString(fmt.Sprintf(`<responseError>
 						<returnCode>24069</returnCode>
@@ -212,7 +212,7 @@ var _ = Describe("Add Port Forwarding Rules", func() {
 			externalPort := 2022
 
 			BeforeEach(func() {
-				gock.New("https://api.ncloud.com").
+				gock.New("https://ncloud.apigw.ntruss.com").
 					Post("/server").
 					Reply(http.StatusBadRequest).BodyString(fmt.Sprintf(`<responseError>
 						<returnCode>24070</returnCode>
@@ -247,7 +247,7 @@ var _ = Describe("Add Port Forwarding Rules", func() {
 	Describe("Single server is existing in multiple rules", func() {
 		Context("Single server is existing in multiple rules", func() {
 			BeforeEach(func() {
-				gock.New("https://api.ncloud.com").
+				gock.New("https://ncloud.apigw.ntruss.com").
 					Post("/server").
 					Reply(http.StatusBadRequest).BodyString(fmt.Sprintf(`<responseError>
 						<returnCode>24071</returnCode>
@@ -282,7 +282,7 @@ var _ = Describe("Add Port Forwarding Rules", func() {
 	Describe("External internal port as well as server instance number are not designated to port forward rule", func() {
 		Context("External internal port as well as server instance number are not designated to port forward rule", func() {
 			BeforeEach(func() {
-				gock.New("https://api.ncloud.com").
+				gock.New("https://ncloud.apigw.ntruss.com").
 					Post("/server").
 					Reply(http.StatusBadRequest).BodyString(fmt.Sprintf(`<responseError>
 						<returnCode>24074</returnCode>

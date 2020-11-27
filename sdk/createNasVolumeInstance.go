@@ -78,9 +78,7 @@ func (s *Conn) CreateNasVolumeInstance(reqParams *RequestCreateNasVolumeInstance
 		return nil, err
 	}
 
-	params["action"] = "createNasVolumeInstance"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL, "/server/v2/createNasVolumeInstance", params)
 	if err != nil {
 		return nil, err
 	}

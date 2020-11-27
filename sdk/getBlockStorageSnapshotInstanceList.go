@@ -4,10 +4,10 @@ import (
 	"encoding/xml"
 	"errors"
 	"fmt"
-	"net/http"
-	"strconv"
 	"github.com/NaverCloudPlatform/ncloud-sdk-go/common"
 	"github.com/NaverCloudPlatform/ncloud-sdk-go/request"
+	"net/http"
+	"strconv"
 )
 
 func processGetBlockStorageSnapshotInstanceListParams(reqParams *RequestGetBlockStorageSnapshotInstanceList) (map[string]string, error) {
@@ -59,9 +59,7 @@ func (s *Conn) GetBlockStorageSnapshotInstanceList(reqParams *RequestGetBlockSto
 		return nil, err
 	}
 
-	params["action"] = "getBlockStorageSnapshotInstanceList"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL, "/server/v2/getBlockStorageSnapshotInstanceList", params)
 	if err != nil {
 		return nil, err
 	}

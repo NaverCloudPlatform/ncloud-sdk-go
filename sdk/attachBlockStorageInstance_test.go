@@ -13,7 +13,7 @@ import (
 var _ = Describe("Attach Block Storage Instance", func() {
 	Describe("Attach Block Storage Instance", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusOK).BodyString(`
 					<attachBlockStorageInstanceResponse>
@@ -90,7 +90,7 @@ var _ = Describe("Attach Block Storage Instance", func() {
 
 	Describe("Invalid ServerInstanceNo", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusInternalServerError).BodyString(`
 					<responseError>
@@ -119,7 +119,7 @@ var _ = Describe("Attach Block Storage Instance", func() {
 
 	Describe("Authorize fail", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusUnauthorized).BodyString(`<responseError>
 					<returnCode>800</returnCode>
@@ -145,7 +145,7 @@ var _ = Describe("Attach Block Storage Instance", func() {
 
 	Describe("Expired URL", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusUnauthorized).BodyString(`<responseError>
 					<returnCode>800</returnCode>

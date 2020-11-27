@@ -18,9 +18,8 @@ func (s *Conn) GetLoadBalancedServerInstanceList(loadBalancerInstanceNo string) 
 	}
 
 	params["loadBalancerInstanceNo"] = loadBalancerInstanceNo
-	params["action"] = "getLoadBalancedServerInstanceList"
 
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL+"loadbalancer/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL, "/loadbalancer/v2/getLoadBalancedServerInstanceList", params)
 	if err != nil {
 		return nil, err
 	}

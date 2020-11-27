@@ -46,9 +46,7 @@ func (s *Conn) RecreateServerInstance(reqParams *RequestRecreateServerInstance) 
 		return nil, err
 	}
 
-	params["action"] = "recreateServerInstance"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL, "/server/v2/recreateServerInstance", params)
 	if err != nil {
 		return nil, err
 	}

@@ -13,7 +13,7 @@ import (
 var _ = Describe("Delete Block Storage Snapshot Instances", func() {
 	Describe("Delete Block Storage Snapshot Instances", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusOK).BodyString(`<deleteBlockStorageSnapshotInstancesResponse>
 				<script />
@@ -79,7 +79,7 @@ var _ = Describe("Delete Block Storage Snapshot Instances", func() {
 	Describe("Unable to Delete Block Storage Snapshot Instance", func() {
 		Context("when invalid Block Storage Snapshot Instance no is invalid", func() {
 			BeforeEach(func() {
-				gock.New("https://api.ncloud.com").
+				gock.New("https://ncloud.apigw.ntruss.com").
 					Post("/server").
 					Reply(http.StatusBadRequest).BodyString(`<responseError>
 						<returnCode>24121</returnCode>

@@ -13,7 +13,7 @@ import (
 var _ = Describe("Create Block Storage Snapshot Instance", func() {
 	Describe("Create Block Storage Snapshot Instance", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusOK).BodyString(`<createBlockStorageSnapshotInstanceResponse>
    				<script />
@@ -80,11 +80,10 @@ var _ = Describe("Create Block Storage Snapshot Instance", func() {
 		})
 	})
 
-
 	Describe("Unable to create Block Storage Snapshot Instance", func() {
 		Context("when invalid BlockStorageInstanceNo is invalid", func() {
 			BeforeEach(func() {
-				gock.New("https://api.ncloud.com").
+				gock.New("https://ncloud.apigw.ntruss.com").
 					Post("/server").
 					Reply(http.StatusInternalServerError).BodyString(`<responseError>
 						<returnCode>1300</returnCode>
@@ -100,8 +99,8 @@ var _ = Describe("Create Block Storage Snapshot Instance", func() {
 			It("should fail", func() {
 				reqParams := new(RequestCreateBlockStorageSnapshotInstance)
 				reqParams.BlockStorageInstanceNo = "blockstorage"
-				reqParams.BlockStorageSnapshotName ="BlockStorageSnapshotInstance"
-				reqParams.BlockStorageSnapshotDescription ="Block Storage Snapshot Instance by SDK go"
+				reqParams.BlockStorageSnapshotName = "BlockStorageSnapshotInstance"
+				reqParams.BlockStorageSnapshotDescription = "Block Storage Snapshot Instance by SDK go"
 
 				conn := NewConnection(accessKey, secretKey)
 				result, err := conn.CreateBlockStorageSnapshotInstance(reqParams)
@@ -115,10 +114,9 @@ var _ = Describe("Create Block Storage Snapshot Instance", func() {
 		})
 	})
 
-
 	Describe("Authorize fail", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusUnauthorized).BodyString(`<responseError>
 					<returnCode>800</returnCode>
@@ -140,7 +138,6 @@ var _ = Describe("Create Block Storage Snapshot Instance", func() {
 			Expect(err.Error()).To(ContainSubstring("401 Unauthorized"))
 		})
 	})
-
 
 	Describe("Check Arguments", func() {
 		It("should be error : BlockStorageInstanceNo field is required", func() {

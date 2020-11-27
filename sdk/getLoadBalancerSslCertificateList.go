@@ -13,13 +13,11 @@ import (
 func (s *Conn) GetLoadBalancerSslCertificateList(certificateName string) (*SslCertificateList, error) {
 	params := make(map[string]string)
 
-	params["action"] = "getLoadBalancerSslCertificateList"
-
 	if certificateName != "" {
 		params["certificateName"] = certificateName
 	}
 
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL+"loadbalancer/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "GET", s.apiURL, "/loadbalancer/v2/getLoadBalancerSslCertificateList", params)
 	if err != nil {
 		return nil, err
 	}

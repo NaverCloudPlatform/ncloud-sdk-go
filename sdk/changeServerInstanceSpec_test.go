@@ -13,7 +13,7 @@ import (
 var _ = Describe("Change Server Instance Spec", func() {
 	Describe("Change Server Instance Spec", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusOK).BodyString(`<changeServerInstanceSpecResponse>
 					<requestId>3c8797b6-f48c-4c1e-bb7f-d323f187bf14</requestId>
@@ -111,7 +111,7 @@ var _ = Describe("Change Server Instance Spec", func() {
 
 	Describe("Invalid server instance number", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusBadRequest).BodyString(`<responseError>
 					<returnCode>24120</returnCode>
@@ -138,7 +138,7 @@ var _ = Describe("Change Server Instance Spec", func() {
 
 	Describe("Invalid server product code", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusBadRequest).BodyString(`<responseError>
 					<returnCode>10712</returnCode>
@@ -165,7 +165,7 @@ var _ = Describe("Change Server Instance Spec", func() {
 
 	Describe("Unable to change", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Post("/server").
 				Reply(http.StatusBadRequest).BodyString(`<responseError>
   					<returnCode>10503</returnCode>

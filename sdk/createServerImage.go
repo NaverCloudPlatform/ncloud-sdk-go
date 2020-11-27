@@ -43,9 +43,7 @@ func (s *Conn) CreateMemberServerImage(reqParams *RequestCreateServerImage) (*Me
 		return nil, err
 	}
 
-	params["action"] = "createMemberServerImage"
-
-	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL+"server/", params)
+	bytes, resp, err := request.NewRequest(s.accessKey, s.secretKey, "POST", s.apiURL, "/server/v2/createMemberServerImage", params)
 	if err != nil {
 		return nil, err
 	}

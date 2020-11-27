@@ -12,7 +12,7 @@ import (
 var _ = Describe("Get Root Password", func() {
 	Describe("Get Root Password", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getRootPasswordResponse>
 							<requestId>074fa0db-a289-4272-8ed5-9f94a0ae5173</requestId>
@@ -69,7 +69,7 @@ var _ = Describe("Get Root Password", func() {
 
 	Describe("Invalid Private Key", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusBadRequest).BodyString(`<responseError>
 					<returnCode>24001</returnCode>
@@ -101,7 +101,7 @@ var _ = Describe("Get Root Password", func() {
 
 	Describe("Invalid Server Instance Number", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusBadRequest).BodyString(`<responseError>
 					<returnCode>1300</returnCode>

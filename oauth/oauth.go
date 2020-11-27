@@ -2,34 +2,11 @@ package oauth
 
 import (
 	"crypto"
-	"crypto/hmac"
 	_ "crypto/sha1"
-	"encoding/base64"
 	"fmt"
 	"io"
-	"math/rand"
-	"net/url"
 	"sort"
-	"strconv"
 	"strings"
-	"sync"
-	"time"
-)
-
-const (
-	OAUTH_VERSION         = "1.0"
-	SIGNATURE_METHOD_HMAC = "HMAC-"
-
-	HTTP_AUTH_HEADER       = "Authorization"
-	OAUTH_HEADER           = "OAuth "
-	CONSUMER_KEY_PARAM     = "oauth_consumer_key"
-	NONCE_PARAM            = "oauth_nonce"
-	SIGNATURE_METHOD_PARAM = "oauth_signature_method"
-	SIGNATURE_PARAM        = "oauth_signature"
-	TIMESTAMP_PARAM        = "oauth_timestamp"
-	TOKEN_PARAM            = "oauth_token"
-	TOKEN_SECRET_PARAM     = "oauth_token_secret"
-	VERSION_PARAM          = "oauth_version"
 )
 
 var HASH_METHOD_MAP = map[crypto.Hash]string{
@@ -39,70 +16,16 @@ var HASH_METHOD_MAP = map[crypto.Hash]string{
 
 // Creates a new Consumer instance, with a HMAC-SHA1 signer
 func NewConsumer(consumerKey string, consumerSecret string, requestMethod string, requestURL string) *Consumer {
-	clock := &defaultClock{}
 	consumer := &Consumer{
 		consumerKey:    consumerKey,
 		consumerSecret: consumerSecret,
 		requestMethod:  requestMethod,
 		requestURL:     requestURL,
-		clock:          clock,
-		nonceGenerator: newLockedNonceGenerator(clock),
 
 		AdditionalParams: make(map[string]string),
 	}
 
-	consumer.signer = &HMACSigner{
-		consumerSecret: consumerSecret,
-		hashFunc:       crypto.SHA1,
-	}
-
 	return consumer
-}
-
-// lockedNonceGenerator wraps a non-reentrant random number generator with alock
-type lockedNonceGenerator struct {
-	nonceGenerator nonceGenerator
-	lock           sync.Mutex
-}
-
-func newLockedNonceGenerator(c clock) *lockedNonceGenerator {
-	return &lockedNonceGenerator{
-		nonceGenerator: rand.New(rand.NewSource(c.Nanos())),
-	}
-}
-
-func (n *lockedNonceGenerator) Int63() int64 {
-	n.lock.Lock()
-	r := n.nonceGenerator.Int63()
-	n.lock.Unlock()
-	return r
-}
-
-type clock interface {
-	Seconds() int64
-	Nanos() int64
-}
-
-type nonceGenerator interface {
-	Int63() int64
-}
-
-type signer interface {
-	Sign(message string) (string, error)
-	Verify(message string, signature string) error
-	SignatureMethod() string
-	HashFunc() crypto.Hash
-	Debug(enabled bool)
-}
-
-type defaultClock struct{}
-
-func (*defaultClock) Seconds() int64 {
-	return time.Now().Unix()
-}
-
-func (*defaultClock) Nanos() int64 {
-	return time.Now().UnixNano()
 }
 
 type Consumer struct {
@@ -118,67 +41,6 @@ type Consumer struct {
 	requestURL string
 
 	debug bool
-
-	// Private seams for mocking dependencies when testing
-	clock clock
-	// Seeded generators are not reentrant
-	nonceGenerator nonceGenerator
-	signer         signer
-}
-
-type HMACSigner struct {
-	consumerSecret string
-	hashFunc       crypto.Hash
-	debug          bool
-}
-
-func (s *HMACSigner) Debug(enabled bool) {
-	s.debug = enabled
-}
-
-func (s *HMACSigner) Sign(message string) (string, error) {
-	key := escape(s.consumerSecret)
-	if s.debug {
-		fmt.Println("Signing:", message)
-		fmt.Println("Key:", key)
-	}
-
-	h := hmac.New(s.HashFunc().New, []byte(key+"&"))
-	h.Write([]byte(message))
-	rawSignature := h.Sum(nil)
-
-	base64signature := base64.StdEncoding.EncodeToString(rawSignature)
-	if s.debug {
-		fmt.Println("Base64 signature:", base64signature)
-	}
-	return base64signature, nil
-}
-
-func (s *HMACSigner) Verify(message string, signature string) error {
-	if s.debug {
-		fmt.Println("Verifying Base64 signature:", signature)
-	}
-	validSignature, err := s.Sign(message)
-	if err != nil {
-		return err
-	}
-
-	if validSignature != signature {
-		decodedSigniture, _ := url.QueryUnescape(signature)
-		if validSignature != decodedSigniture {
-			return fmt.Errorf("signature did not match")
-		}
-	}
-
-	return nil
-}
-
-func (s *HMACSigner) SignatureMethod() string {
-	return SIGNATURE_METHOD_HMAC + HASH_METHOD_MAP[s.HashFunc()]
-}
-
-func (s *HMACSigner) HashFunc() crypto.Hash {
-	return s.hashFunc
 }
 
 func escape(s string) string {
@@ -202,33 +64,19 @@ func isEscapable(b byte) bool {
 
 func (c *Consumer) Debug(enabled bool) {
 	c.debug = enabled
-	c.signer.Debug(enabled)
 }
 
-func (c *Consumer) GetRequest() (string, io.Reader, error) {
-	c.AdditionalParams["responseFormatType"] = "xml"
-
-	params := c.baseParams(c.consumerKey, c.AdditionalParams)
+func (c *Consumer) GetRequest(url string) (string, string, io.Reader, error) {
+	params := c.baseParams(c.AdditionalParams)
 
 	if c.debug {
 		fmt.Println("params:", params)
 	}
 
-	req := &request{
-		method:      c.requestMethod,
-		url:         c.requestURL,
-		oauthParams: params,
-	}
-
-	signature, err := c.signRequest(req)
-	if err != nil {
-		return "", nil, err
-	}
-
 	result := ""
 
-	for pos, key := range req.oauthParams.Keys() {
-		for innerPos, value := range req.oauthParams.Get(key) {
+	for pos, key := range params.Keys() {
+		for innerPos, value := range params.Get(key) {
 			if pos+innerPos != 0 {
 				result += "&"
 			}
@@ -236,49 +84,27 @@ func (c *Consumer) GetRequest() (string, io.Reader, error) {
 		}
 	}
 
-	result += fmt.Sprintf("&%s=%s", SIGNATURE_PARAM, escape(signature))
-
 	if c.debug {
 		fmt.Println("req: ", result)
 	}
 
-	if req.method == "GET" {
-		return req.url + "?" + result, nil, nil
-	} else if req.method == "POST" {
-		return req.url, strings.NewReader(result), nil
+	if c.requestMethod == "GET" {
+		return url, result, nil, nil
+	} else if c.requestMethod == "POST" {
+		return url, "", strings.NewReader(result), nil
 	} else {
-		return "", nil, fmt.Errorf("Not supported method %s", req.method)
+		return "", "", nil, fmt.Errorf("Not supported method %s", c.requestMethod)
 	}
 }
 
-func (c *Consumer) baseParams(consumerKey string, additionalParams map[string]string) *OrderedParams {
+func (c *Consumer) baseParams(additionalParams map[string]string) *OrderedParams {
 	params := NewOrderedParams()
-	params.Add(VERSION_PARAM, OAUTH_VERSION)
-	params.Add(SIGNATURE_METHOD_PARAM, c.signer.SignatureMethod())
-	params.Add(TIMESTAMP_PARAM, strconv.FormatInt(c.clock.Seconds(), 10))
-	params.Add(NONCE_PARAM, strconv.FormatInt(c.nonceGenerator.Int63(), 10))
-	params.Add(CONSUMER_KEY_PARAM, consumerKey)
 
 	for key, value := range additionalParams {
 		params.Add(key, value)
 	}
 
 	return params
-}
-
-func (c *Consumer) signRequest(req *request) (string, error) {
-	baseString := c.requestString(req.method, req.url, req.oauthParams)
-
-	if c.debug {
-		fmt.Println("baseString: ", baseString)
-	}
-
-	signature, err := c.signer.Sign(baseString)
-	if err != nil {
-		return "", err
-	}
-
-	return signature, nil
 }
 
 func (c *Consumer) requestString(method string, url string, params *OrderedParams) string {
@@ -294,13 +120,6 @@ func (c *Consumer) requestString(method string, url string, params *OrderedParam
 		}
 	}
 	return result
-}
-
-type request struct {
-	method      string
-	url         string
-	oauthParams *OrderedParams
-	userParams  map[string]string
 }
 
 //

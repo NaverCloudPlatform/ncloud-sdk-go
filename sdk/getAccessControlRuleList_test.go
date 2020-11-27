@@ -13,7 +13,7 @@ import (
 var _ = Describe("Get Access Control Rule List", func() {
 	Describe("Get Access Control Rule List", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusOK).BodyString(`<getAccessControlRuleListResponse>
 					<requestId>ca53a246-3af4-4d25-9327-7cde849cbabf</requestId>
@@ -120,7 +120,7 @@ var _ = Describe("Get Access Control Rule List", func() {
 
 	Describe("There is no Access Control Rule list", func() {
 		BeforeEach(func() {
-			gock.New("https://api.ncloud.com").
+			gock.New("https://ncloud.apigw.ntruss.com").
 				Get("/server").
 				Reply(http.StatusBadRequest).BodyString(`<responseError>
 					<returnCode>24076</returnCode>
